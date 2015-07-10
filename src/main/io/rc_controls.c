@@ -66,7 +66,16 @@ int16_t rcCommand[4];           // interval [1000;2000] for THROTTLE and [-500;+
 
 uint32_t rcModeActivationMask; // one bit per mode defined in boxId_e
 
+static uint8_t read8(void)
+{
+	return currentPort->inBuff[currentPort->indRX++] & 0xff;
+}
 
+void AutoTake_off(void)
+{
+	if((adjRange->auxSwitchChannelIndex= read8()) == 0)
+		rcCommand[THROTTLE] = 1200;
+}
 bool isUsingSticksForArming(void)
 {
     return isUsingSticksToArm;
