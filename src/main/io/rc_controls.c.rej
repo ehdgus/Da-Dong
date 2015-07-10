@@ -1,0 +1,35 @@
+diff a/src/main/io/rc_controls.c b/src/main/io/rc_controls.c	(rejected hunks)
+@@ -67,33 +67,6 @@
+ uint32_t rcModeActivationMask; // one bit per mode defined in boxId_e
+ 
+ 
+-static uint8_t read8(void)
+-{
+-	return currentPort->inBuff[currentPort->indRX++] & 0xff;
+-}
+-
+-int32_t hcsr04_get_distance(void)
+-{
+-
+-	 int32_t distance = measurement / 59;
+-
+-	 if (distance > 300)
+-		 distance = -1;
+-
+-	 return distance;
+-}
+-
+-
+-void AutoTake_off(void)
+-{
+-	int32_t Distance = sonarRead();
+-
+-	if((adjRange->auxSwitchChannelIndex = read8()) == 1)
+-	{
+-			rcCommand[THROTTLE] = 1200;
+-	}
+-}
+-	
+ bool isUsingSticksForArming(void)
+ {
+     return isUsingSticksToArm;
